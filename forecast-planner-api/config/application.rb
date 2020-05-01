@@ -34,15 +34,29 @@ module ForecastPlannerApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins '*'
-        resource(
-          '*',
-          headers: :any,
-          methods: [:get, :patch, :put, :delete, :post, :options]
-          )
-      end
-    end
+
+  
+  
+  end
+end
+    
+  # config.middleware.insert_before 0, "Rack::Cors" do
+    #   allow do
+    #     origins '*'
+    #     resource(
+    #       '*',
+    #       headers: :any,
+    #       methods: [:get, :patch, :put, :delete, :post, :options]
+    #       )
+    #   end
+    # end
+
+module SessionAuthApi
+  class Application < Rails::Application
+    config.load_defaults 6.0
+    config.api_only = true
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end

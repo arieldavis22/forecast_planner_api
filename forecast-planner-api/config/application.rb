@@ -38,7 +38,8 @@ module ForecastPlannerApi
     config.api_only = true
 
 
-  
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   
   end
 end
@@ -54,12 +55,10 @@ end
     #   end
     # end
 
-module SessionAuthApi
-  class Application < Rails::Application
-    config.load_defaults 6.0
-    config.api_only = true
+# module SessionAuthApi
+#   class Application < Rails::Application
+#     config.load_defaults 6.0
+#     config.api_only = true
 
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
-  end
-end
+#   end
+# end

@@ -19,10 +19,14 @@ class EventsController < ApplicationController
 
 
     req = RestClient.get('http://api.weatherbit.io/v2.0/forecast/daily', {params: {'key' => ENV["WEATHER_API_KEY"], 'city' => event.location}})
+    
+    req_data = JSON.parse(req)["data"].select do |data|
+      data["valid_date"] === event.date
+    end
 
     render :json => {
       event: event,
-      request: req
+      request: req_data
     }
   end
 

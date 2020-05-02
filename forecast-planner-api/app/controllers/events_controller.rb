@@ -17,7 +17,6 @@ class EventsController < ApplicationController
       date: params["date"]
     )
 
-
     req = RestClient.get('http://api.weatherbit.io/v2.0/forecast/daily', {params: {'key' => ENV["WEATHER_API_KEY"], 'city' => event.location}})
     
     req_data = JSON.parse(req)["data"].select do |data|

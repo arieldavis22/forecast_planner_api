@@ -11,4 +11,16 @@ class UsersController < ApplicationController
         
     end
 
+    def getevents
+        user = User.find_by(name: params[:currentUser])
+
+        if user
+            render :json => {
+                events: user.events
+            }
+        else
+            render json: {error: "Not logged in"}, status: :unauthorized
+        end
+    end
+
 end

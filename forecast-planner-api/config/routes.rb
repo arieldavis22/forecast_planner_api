@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post '/login', to: "auth#login"
   get '/autologin', to: "auth#autologin"
   post '/logout', to: "auth#logout"
+
+  post '/getevents', to: "users#getevents"
 end

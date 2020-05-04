@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :events, only: [:create, :update]
+  resources :events, only: [:create, :update, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   post '/signup', to: "users#create"
   post '/login', to: "auth#login"

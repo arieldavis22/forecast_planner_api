@@ -15,7 +15,9 @@ class EventsController < ApplicationController
     event = Event.create(title: params["title"], 
       details: params["details"], 
       location: params["location"], 
-      date: params["date"]
+      date: params["date"],
+      indoor: params["indoor"],
+      precipitation_chance: []
     )
 
     req = RestClient.get('http://api.weatherbit.io/v2.0/forecast/daily', {params: {'key' => ENV["WEATHER_API_KEY"], 'city' => event.location}})
@@ -24,7 +26,8 @@ class EventsController < ApplicationController
       data["valid_date"] === event.date
     end
 
-    byebug
+    event.precipitation_chance = req_data[0]["pop"]
+
     user = User.find_by(name:params["currentUser"])
     user.events << event
 

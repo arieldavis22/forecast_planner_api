@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
     def create
         user = User.create(name: params[:name], password: params[:password])
+        byebug
+        
         if user
             session[:user_id] = user.id
             render json: user

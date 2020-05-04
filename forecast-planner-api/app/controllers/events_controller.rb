@@ -37,5 +37,17 @@ class EventsController < ApplicationController
     }
   end
 
+  def update
+    event = Event.all.find_by(id: params[:id].to_str)
+    event.update(
+      title: params["title"], 
+      details: params["details"], 
+      location: params["location"], 
+      date: params["date"],
+      indoor: params["indoor"]
+    )
+    render json: event
+  end
+
 
 end

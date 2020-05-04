@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :events, :users
+  resources :users
+  resources :events, only: [:create, :update, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   post '/signup', to: "users#create"
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
   post '/logout', to: "auth#logout"
   post '/addfriend', to: "users#addfriend"
   post '/seefriends', to: "users#seefriends"
+
+
 
   post '/getevents', to: "users#getevents"
 end

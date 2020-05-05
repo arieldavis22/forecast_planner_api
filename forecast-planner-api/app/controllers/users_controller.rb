@@ -41,8 +41,9 @@ class UsersController < ApplicationController
         user = User.find_by(name: params[:currentUser])
 
         if user
+            sorted_events = user.events.order(:date)
             render :json => {
-                events: user.events
+                events: sorted_events
             }
         else
             render json: {error: "Not logged in"}, status: :unauthorized

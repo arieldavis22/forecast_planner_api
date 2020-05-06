@@ -37,13 +37,34 @@ class UsersController < ApplicationController
         end
     end
 
+    def get_friend_events(user)
+        if !user.friendees
+            return
+        end
+
+        friendees = user.friendees
+
+        filtered = friendees.filter do |friend|
+            friend.friendees.include?(user)
+        end
+
+        events = filtered.map do |friend|
+            {:name => friend.name,
+            :events => friend.events}
+        end
+
+        events.flatten
+    end
+
     def getevents
         user = User.find_by(name: params[:currentUser])
 
         if user
             sorted_events = user.events.order(:date)
+            friend_events = get_friend_events(user)
             render :json => {
-                events: sorted_events
+                events: sorted_events,
+                friend_events: friend_events
             }
         else
             render json: {error: "Not logged in"}, status: :unauthorized

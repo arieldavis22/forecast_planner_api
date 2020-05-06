@@ -48,12 +48,17 @@ class UsersController < ApplicationController
             friend.friendees.include?(user)
         end
 
-        events = filtered.map do |friend|
-            {:name => friend.name,
-            :events => friend.events}
+        friend_events = []
+        filtered.each do |friend|
+            friend.events.each do |event|
+                friend_events.push({
+                    :name => friend.name,
+                    :event => event
+                })
+            end
         end
 
-        events.flatten
+        sorted = friend_events.sort_by { |h| h[:event][:date]}
     end
 
     def getevents

@@ -26,15 +26,24 @@ class EventsController < ApplicationController
       data["valid_date"] === event.date
     end
 
-    event.precipitation_chance = req_data[0]["pop"]
+    if req_data.length > 0
+      event.precipitation_chance = req_data[0]["pop"]
 
-    user = User.find_by(name:params["currentUser"])
-    user.events << event
-
-    render :json => {
-      event: event,
-      request: req_data
-    }
+      user = User.find_by(name:params["currentUser"])
+      user.events << event
+  
+      render :json => {
+        event: event,
+        request: req_data
+      }
+    else
+      user = User.find_by(name:params["currentUser"])
+      user.events << event
+  
+      render :json => {
+        event: event
+      }
+    end
   end
 
   def update

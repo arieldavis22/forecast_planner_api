@@ -10,6 +10,10 @@ The purpose of the Forecast Planner application is to provide users with the too
 This is the backend for the full stack application Forecast Planner. In order to reach the client-side repo, please use the following link:
 [Forecast Planner Client](https://github.com/arieldavis22/forecast_planner_client)
 
+### Demo
+
+To see this project in action, check it out on youtube: https://youtu.be/zI-P3ePoDRE
+
 ### Examples
 
 ![alt text](https://i.imgur.com/SDR0pTd.png "Ex1")
